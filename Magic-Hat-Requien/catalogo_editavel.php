@@ -116,6 +116,7 @@ class produtos
             <div class="section-title" data-aos="zoom-out">
               <p>Produtos</p>
               <h2>VEJA NOSSO CATÁLOGO DE PRODUTOS</h2>
+              <h2>APERTE CRTL + F5 PARA ATUALIZAR O CATÁLOGO APÓS UMA EDIÇÃO</h2>
             </div>
           </div>
         </section>
