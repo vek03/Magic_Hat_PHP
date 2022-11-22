@@ -6,10 +6,10 @@ date_default_timezone_set('America/Sao_Paulo');
 
 // conexão com o banco de dados
 
-define('BD_SERVIDOR','localhost');
-define('BD_USUARIO','root');
-define('BD_SENHA','');
-define('BD_BANCO','magic_db');
+define('BD_SERVIDOR','us-cdbr-east-06.cleardb.net');
+define('BD_USUARIO','b8ece70e4a8785');
+define('BD_SENHA','5c64dd89');
+define('BD_BANCO','heroku_4b4b30c4f7e0a53');
     
 class Banco{
 
