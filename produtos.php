@@ -1,5 +1,6 @@
 <?php
 require_once("controller/controller.php");
+ini_set('default_charset','UTF-8');
 
 class produtos
 {
