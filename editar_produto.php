@@ -289,7 +289,7 @@ class index
                     </div>
 
                     <div class="php-email-form text-center col-12">
-                      <button type="submit" id="btnCadastrar" name="submit" class="btn btn-dark">Cadastrar Produto</button>
+                      <button type="submit" id="btnCadastrar" name="submit" class="btn btn-dark">Editar Produto</button>
                     </div>
                 </form>
 
