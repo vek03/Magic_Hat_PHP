@@ -1,6 +1,6 @@
 <?php
 require_once("controller/controller.php");
-ini_set('default_charset','UTF-8');
+
 
 class produtos
 {
@@ -13,6 +13,7 @@ class produtos
     session_start();
 
     if (isset($_SESSION['id_cliente']) && $_SESSION['id_cliente'] > 0) {
+      
       $cod_cli = $_SESSION['id_cliente'];
       $logado = true;
       $controller = new controller();

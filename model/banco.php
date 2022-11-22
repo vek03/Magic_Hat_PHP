@@ -194,17 +194,17 @@ class Banco{
 
             foreach ($lista as $l) {
                 $f_lista[$i]['id'] = $l['id'];
-                $f_lista[$i]['nome'] = $l['nome'];
-                $f_lista[$i]['sobrenome'] = $l['sobrenome'];
+                $f_lista[$i]['nome'] = utf8_encode($l['nome']);
+                $f_lista[$i]['sobrenome'] = utf8_encode($l['sobrenome']);
                 $f_lista[$i]['email'] = $l['email'];
                 $f_lista[$i]['senha'] = $l['senha'];
-                $f_lista[$i]['endereco'] = $l['endereco'];
+                $f_lista[$i]['endereco'] = utf8_encode($l['endereco']);
                 $f_lista[$i]['numero'] = $l['numero'];
-                $f_lista[$i]['bairro'] = $l['bairro'];
+                $f_lista[$i]['bairro'] = utf8_encode($l['bairro']);
                 $f_lista[$i]['cep'] = $l['cep'];
-                $f_lista[$i]['cidade'] = $l['cidade'];
+                $f_lista[$i]['cidade'] = utf8_encode($l['cidade']);
                 $f_lista[$i]['estado'] = $l['estado'];
-                $f_lista[$i]['preferencia'] = $l['preferencia'];
+                $f_lista[$i]['preferencia'] = utf8_encode($l['preferencia']);
             }
             return $f_lista;
         } catch (Exception $e) {
@@ -222,19 +222,20 @@ class Banco{
             $i = 0;
             foreach ($lista as $l) {
                 $f_lista[$i]['id'] = $l['id'];
-                $f_lista[$i]['categoria'] = $l['categoria'];
-                $f_lista[$i]['nome'] = $l['nome'];
-                $f_lista[$i]['tipo1'] = $l['tipo1'];
-                $f_lista[$i]['tipo2'] = $l['tipo2'];
-                $f_lista[$i]['faixa'] = $l['faixa_etaria'];
+                $f_lista[$i]['categoria'] = utf8_encode($l['categoria']);
+                $f_lista[$i]['nome'] = utf8_encode($l['nome']);
+                $f_lista[$i]['tipo1'] = utf8_encode($l['tipo1']);
+                $f_lista[$i]['tipo2'] = utf8_encode($l['tipo2']);
+                $f_lista[$i]['faixa'] = utf8_encode($l['faixa_etaria']);
                 $f_lista[$i]['preco'] = $l['preco'];
-                $f_lista[$i]['marca'] = $l['marca'];
-                $f_lista[$i]['material'] = $l['material'];
+                $f_lista[$i]['marca'] = utf8_encode($l['marca']);
+                $f_lista[$i]['material'] = utf8_encode($l['material']);
                 $f_lista[$i]['quant'] = $l['quant'];
-                $f_lista[$i]['descricao'] = $l['descricao'];
+                $f_lista[$i]['descricao'] = utf8_encode($l['descricao']);
                 $f_lista[$i]['img1'] = $l['img1'];
                 $f_lista[$i]['img2'] = $l['img2'];
                 $f_lista[$i]['img3'] = $l['img3'];
+                $i++;
             }
 
             if($total >= 1){
@@ -263,16 +264,16 @@ class Banco{
             $i = 0;
             foreach ($lista as $l) {
                 $f_lista[$i]['id'] = $l['id'];
-                $f_lista[$i]['categoria'] = $l['categoria'];
-                $f_lista[$i]['nome'] = $l['nome'];
-                $f_lista[$i]['tipo1'] = $l['tipo1'];
-                $f_lista[$i]['tipo2'] = $l['tipo2'];
-                $f_lista[$i]['faixa'] = $l['faixa_etaria'];
+                $f_lista[$i]['categoria'] = utf8_encode($l['categoria']);
+                $f_lista[$i]['nome'] = utf8_encode($l['nome']);
+                $f_lista[$i]['tipo1'] = utf8_encode($l['tipo1']);
+                $f_lista[$i]['tipo2'] = utf8_encode($l['tipo2']);
+                $f_lista[$i]['faixa'] = utf8_encode($l['faixa_etaria']);
                 $f_lista[$i]['preco'] = $l['preco'];
-                $f_lista[$i]['marca'] = $l['marca'];
-                $f_lista[$i]['material'] = $l['material'];
+                $f_lista[$i]['marca'] = utf8_encode($l['marca']);
+                $f_lista[$i]['material'] = utf8_encode($l['material']);
                 $f_lista[$i]['quant'] = $l['quant'];
-                $f_lista[$i]['descricao'] = $l['descricao'];
+                $f_lista[$i]['descricao'] = utf8_encode($l['descricao']);
                 $f_lista[$i]['img1'] = $l['img1'];
                 $f_lista[$i]['img2'] = $l['img2'];
                 $f_lista[$i]['img3'] = $l['img3'];
@@ -340,7 +341,7 @@ class Banco{
                         $stmt = $this->mysqli->query("SELECT * FROM tbl_produto WHERE id =" . $carrinho[$ii]['id_produto'] . ";");
                         $lista = $stmt->fetch_all(MYSQLI_ASSOC);
                         foreach ($lista as $l) {
-                            $carrinho[$ii]['produto'] = $l['nome'];
+                            $carrinho[$ii]['produto'] = utf8_encode($l['nome']);
                             $carrinho[$ii]['preco'] = $l['preco'];
                             $carrinho[$ii]['img'] = $l['img1'];
                             $carrinho[$ii]['quant_index'] = $l['quant'];
