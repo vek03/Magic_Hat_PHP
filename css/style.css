@@ -66,6 +66,16 @@ h6 {
   width: 100px;
 }
 
+.container-fluid {
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -1613,7 +1623,7 @@ footer a {
   background-size: cover;
   background-position: center;
   border-radius: 8px;
-  min-height: 475px;
+  min-height: 400px;
   transition: transform 0.7s cubic-bezier(.4, .2, .2, .1);
   backface-visibility: hidden;
 }
@@ -1766,6 +1776,23 @@ footer a {
 
 .accordion-button:focus{
   border-color:#A11E1D
+}
+
+.accordion-button::after {
+  background-image: initial;
+  width: 0;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: initial;
+  width: 0;
+}
+
+.accordion-button {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 /* ---------------------------------------------------
   Produtos

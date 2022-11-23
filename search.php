@@ -1,24 +1,28 @@
 <?php
 require_once("controller/controller.php");
 
+
 class produtos
 {
+
   private $cod_cli;
   private $logado;
 
   public function __construct()
   {
     session_start();
-    
+
     if (isset($_SESSION['id_cliente']) && $_SESSION['id_cliente'] > 0) {
+      
       $cod_cli = $_SESSION['id_cliente'];
       $logado = true;
       $controller = new controller();
       $cliente = $controller->captar($cod_cli);
-      $script = "javascript:document.location='carrinho.php'";
+      $script2 = "javascript:document.location='carrinho.php'";
     } else {
+      $script = "javascript:alert('Entre na sua conta para adicionar itens ao seu carrinho...');";
+      $script2 = "javascript:alert('Entre na sua conta para visualizar os itens do seu carrinho...');";
       $logado = false;
-      $script = "javascript:alert('Entre na sua conta para visualizar os itens do seu carrinho...');";
     }
 
 ?>
@@ -34,14 +38,10 @@ class produtos
       <meta content="" name="description">
       <meta content="" name="keywords">
 
-      <!-- JQuery Files -->
-      <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-
       <!-- Favicons -->
       <link href="img/magichat/icone.ico" rel="icon">
       <link href="img/magichat/icone.ico" rel="apple-touch-icon">
       <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
-
       <!-- Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -57,6 +57,7 @@ class produtos
 
       <!-- Template Main CSS File -->
       <link href="css/style.css" rel="stylesheet">
+
 
     </head>
 
@@ -87,7 +88,7 @@ class produtos
             <ul>
               <li><a class="nav-link scrollto" href="index.php">Home</a></li>
               <li><a class="nav-link scrollto active" href="produtos.php">Brinquedos</a></li>
-              <li><a class="nav-link scrollto" href="index.php#flipCard">Porque brincar</a></li>
+              <li><a class="nav-link scrollto" href="index.php#flipcard">Porque brincar</a></li>
               <li><a class="nav-link scrollto " href="faleconosco.php">Fale conosco</a></li>
               <li class="dropdown"><a href="#"><span>
                     <ion-icon id="person" name="person"></ion-icon>
@@ -116,7 +117,14 @@ class produtos
 
 
             </ul>
+            </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
+
+            <button id="cart" class="navbar-toggler" type="button" data-bs-toggle="modal" onclick="<?php echo $script2; ?>">
+              <span>
+                <ion-icon id="cart" name="cart"></ion-icon>
+              </span>
+            </button>
           </nav><!-- .navbar -->
 
         </div>
@@ -124,6 +132,7 @@ class produtos
 
       <main id="main">
 
+        <!-- ====== Pesquisa =======-->
         <div id="header">
           <div class="col">
             <nav class="navbar  container text-center">
@@ -149,12 +158,56 @@ class produtos
 
         <?php echo "<script>$('#txtPesquisa').val('" . $_POST['txtPesquisa'] . "');</script>"; ?>
 
+        <!-- ======= Container Section ======= -->
+        <section id="cta" class="cta">
+          <div class="container">
+            <div class="section-title" data-aos="zoom-out">
+              <p>Produtos</p>
+              <h2>VEJA NOSSO CATÁLOGO DE PRODUTOS</h2>
+            </div>
+
+            <center>
+
+              <div id="carouselExampleControls" data-aos-delay="5000" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/bonecas.jpg">
+                  </div>
+
+                  <div class="carousel-item active">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/bonecos.jpg">
+                  </div>
+
+                  <div class="carousel-item">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/carrinhos.jpg">
+                  </div>
+
+                  <div class="carousel-item">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/herois.jpg">
+                  </div>
+
+                  <div class="carousel-item">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/jogos.jpg">
+                  </div>
+
+                  <div class="carousel-item">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/princesas.jpg">
+                  </div>
+                </div>
+
+
+              </div>
+
+            </center>
+          </div>
+        </section>
+        <!-- End Cta Section -->
 
 
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio">
           <div class="container">
-
 
             <ul id="portfolio-flters" class="d-flex justify-content-end" data-aos="fade-up">
               <ul>
@@ -172,7 +225,7 @@ class produtos
             <br>
             <br>
             <br>
-            
+
             <div class="row portfolio-container pricing" data-aos="fade-up">
               <div class="row">
 
@@ -187,7 +240,7 @@ class produtos
                     }
                 ?>
 
-                  <div class="col-lg-3 col-md-6 mt-4 mt-md-0 portfolio-item <?php echo $produtos[$i]['categoria']; ?>">
+<div class="col-lg-3 col-md-6 mt-4 mt-md-0 portfolio-item <?php echo $produtos[$i]['categoria']; ?>">
                     <div class="box " data-aos="zoom-in" data-aos-delay="100">
                       <h3 style="height: 105px;"><?php echo $produtos[$i]['nome']; ?></h3>
                       <div><img style="height: 250px; width: 250px;" src="<?php echo $produtos[$i]['img1']; ?>"></div>
@@ -338,10 +391,9 @@ class produtos
 
                   <!-- parte do Preço do produto -->
                   
-                  <div class="row">
-                    <div class="col-md-6">
-                      <h3>R$ <?php echo $produtos[$i]['preco']; ?></h3>
-                      <h3></h3>
+                  <div class="row pricing">
+                    <div class="col-md-12">
+                    <h4 style="color: black"><sup>R$ <?php echo $produtos[$i]['preco']; ?></sup></h4>
                     </div>
                   </div>
                   
@@ -375,6 +427,7 @@ class produtos
     </section>
     <!-- End Janela modal -->
 
+
       </main>
 
       <!-- End #main -->
@@ -400,7 +453,7 @@ class produtos
       <footer>
 
         <!-- Seção de Mídias Sociais -->
-        <ul class="social_icon">
+          <ul class="social_icon">
             <li><a href="https://twitter.com/MagicHatOficial">
                 <ion-icon name="logo-twitter"></ion-icon>
               </a>
@@ -432,8 +485,7 @@ class produtos
               </h3>
 
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam ipsam fugiat cum provident aut odio.
-                Quae aliquid eveniet neque et fuga sint excepturi laborum nam, iure, a natus ipsa consequuntur!
+                A Magic Hat é uma loja virtual de brinquedos que visa atender seus clientes de forma rápida, interativa, com qualidade em seu atendimento e produtos e, principalmente, com segurança.
               </p>
             </div>
 
@@ -466,22 +518,26 @@ class produtos
 
             </div>
 
-            <!-- 4° Coluna -->
+            <!-- 3° Coluna -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <!-- Links Contato -->
               <h3 class="fw-bold">
                 Contato
               </h3>
               <p>
-                Av. Águia de Haia, 2633 - Cidade Antônio Estêvão de Carvalho, São Paulo
+                Endereço: Av. Águia de Haia, 2633 - Cidade Antônio Estêvão de Carvalho, São Paulo
               </p>
 
               <p>
-                magichat@outlook.com
+                CEP: 01311-000
               </p>
 
               <p>
-                (11) 69318-8308
+                Atendimento por: magichat@outlook.com
+              </p>
+
+              <p>
+                Contato: (11) 69318-8308
               </p>
 
             </div>
@@ -489,9 +545,8 @@ class produtos
           </div>
 
         </div>
-        </div>
 
-        <p>©2022 Copyright <b>Magic Hat</b> | All Rights Reserved</p>
+        <p>©2022 Copyright <b>Magic Hat</b> | Todos os Direitos Reservados</p>
       </footer>
 
       <!-- End Footer -->
@@ -501,7 +556,6 @@ class produtos
         <!-- Vendor JS Files -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
@@ -510,7 +564,7 @@ class produtos
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-      <!-- Template Main JS File -->
+        <!-- Template Main JS File -->
       <script src="js/main.js"></script>
 
     </body>

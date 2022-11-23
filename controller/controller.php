@@ -1,7 +1,7 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once("$root/model/model_compra.php");
-require_once("$root/model/model_produto.php");
+require_once("$root/model_compra.php");
+require_once("$root/model_produto.php");
 require_once("$root/model/model_cliente.php");
 require_once("$root/model/banco.php");
 class controller{
@@ -43,22 +43,33 @@ class controller{
     }
 
     private function incluir(){
-        $this->cliente->setNome($_POST['txtNome']);
-        $this->cliente->setSobrenome($_POST['txtSobrenome']);
-        $this->cliente->setEmail($_POST['txtEmail']);
-        $this->cliente->setSenha($_POST['txtSenha']);
-        $this->cliente->setEndereco($_POST['txtEndereco']);
-        $this->cliente->setNum($_POST['txtNum']);
-        $this->cliente->setBairro($_POST['txtBairro']);
-        $this->cliente->setCep($_POST['txtCep']);
-        $this->cliente->setCidade($_POST['txtCidade']);
-        $this->cliente->setEstado($_POST['txtEstado']);
-        $this->cliente->setPreferencia($_POST['cboCategorias']);
-        $result = $this->cliente->incluir();
-        if($result >= 1){
+        if(isset($_POST['txtEndereco']) == FALSE){
+            $this->cliente->setNome($_POST['txtNome']);
+            $this->cliente->setSobrenome($_POST['txtSobrenome']);
+            $this->cliente->setEmail($_POST['txtEmail']);
+            $this->cliente->setSenha($_POST['txtSenha']);
+            $this->cliente->setEndereco($_POST['txtEndereco']);
+            $this->cliente->setNum($_POST['txtNum']);
+            $this->cliente->setBairro($_POST['txtBairro']);
+            $this->cliente->setCep($_POST['txtCep']);
+            $this->cliente->setCidade($_POST['txtCidade']);
+            $this->cliente->setEstado($_POST['txtEstado']);
+            $this->cliente->setPreferencia($_POST['cboCategorias']);
+            $result = $this->cliente->incluir();
+        }
+        else{
+            $result = 3;
+        }
+        
+        if($result == 1){
             echo "<script>alert('Cadastro realizado com sucesso!');document.location='../login.php'</script>";
-        }else{
-            echo "<script>alert('Erro ao enviar cadastro!');</script>";
+        }else if($result == 2){
+            echo "<script>alert('Já existe um registro com este e-mail! Tente usar outro...');document.location='../cadastro.php'</script>";
+        }else if($result == 3){
+            echo "<script>alert('Insira um CEP válido!');document.location='../cadastro.php'</script>";
+        }    
+        else{
+            echo "<script>alert('Não foi possível cadastrar sua conta! Tente novamente e reveja suas informações!');document.location='../cadastro.php'</script>";
         }
     }
 
@@ -117,10 +128,12 @@ class controller{
         $this->produto->setMaterialProd($_POST['txtMaterial']);
         $this->produto->setDescProd($_POST['txtDescr']);
         $result = $this->produto->incluirProd();
-        if($result >= 1){
+        if($result == 1){
             echo "<script>alert('Produto incluído com sucesso!');document.location='../cadastro_produto.php'</script>";
+        }else if($result == 2){
+            echo "<script>alert('Já existe um produto com este nome!');document.location='../cadastro_produto.php'</script>";
         }else{
-            echo "<script>alert('Erro ao incluir produto!');document.location='../cadastro_produto.php'</script>";
+            echo "<script>alert('Erro ao cadastrar o produto! Cheque as informações e as imagens!');document.location='../cadastro_produto.php'</script>";
         }
     }
 
@@ -138,10 +151,12 @@ class controller{
         $this->produto->setMaterialProd($_POST['txtMaterial']);
         $this->produto->setDescProd($_POST['txtDescr']);
         $result = $this->produto->updateProd();
-        if($result >= 1){
+        if($result == 1){
             echo "<script>alert('Produto atualizado com sucesso!');document.location='../catalogo_editavel.php'</script>";
+        }else if($result == 2){
+            echo "<script>alert('Já existe um produto com este nome!');document.location='../catalogo_editavel.php'</script>";
         }else{
-            echo "<script>alert('Erro ao editar produto!');document.location='../catalogo_editavel.php'</script>";
+            echo "<script>alert('Erro ao editar o produto! Cheque as informações e as imagens!');document.location='../catalogo_editavel.php'</script>";
         }
     }
 

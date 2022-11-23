@@ -119,6 +119,30 @@ class finalizar
 
             <main id="main">
 
+                    <!-- ====== Pesquisa =======-->
+        <div id="header">
+          <div class="col">
+            <nav class="navbar  container text-center">
+              <div class="col order-first"></div>
+              <div class="col-9">
+
+                <form method="post" action="search.php" id="formPesq" name="formPesq">
+                  <div class="input-group">
+                    <input autofocus type="text" placeholder="Com o que vamos brincar?" class="form-control" name="txtPesquisa" required id="txtPesquisa">
+                    <button style="background-color: #ED4442;" class="btn btn-outline-light" type="submit">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                      </svg>
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+              <div class="col order-last"></div>
+            </nav>
+          </div>
+        </div>
+
                 <br><br>
                 <!-- ======= Pricing Section ======= -->
                 <section id="pricing" class="pricing">
@@ -127,6 +151,7 @@ class finalizar
                         <div class="section-title" data-aos="zoom-out">
                             <p>Carrinho</p>
                             <h2>Esses são os seus itens no carrinho</h2>
+                            <h2>Para atualizar a quantidade de um produto, coloque a nova quantidade e clique em atualizar carrinho</h2>
                         </div>
 
                     </div>
@@ -336,7 +361,6 @@ class finalizar
         <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

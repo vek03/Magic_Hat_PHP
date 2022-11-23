@@ -56,39 +56,64 @@ class Banco{
     }
 
     public function setCadastro($nome,$sobrenome,$email,$senha,$endereco,$num,$bairro,$cep,$cidade,$estado,$preferencia){
-        $stmt = $this->mysqli->prepare("INSERT INTO tbl_cliente (`nome`,`sobrenome`, `email`, `senha`, `endereco`,`numero`, `bairro`, `cep`, `cidade`, `estado`, `preferencia`) VALUES (?,?,?,?,?,?,?,?,?,?,?);");
-        $stmt->bind_param("sssssssssss",$nome,$sobrenome,$email,$senha,$endereco,$num,$bairro,$cep,$cidade,$estado,$preferencia);
-        if( $stmt->execute() == TRUE){
-            return true ;
+        $stmt = $this->mysqli->query("SELECT * FROM tbl_cliente WHERE `email` = '" . $email . "';");
+        $repeat = mysqli_num_rows($stmt); 
+
+        if($repeat > 0){
+            return 2;
         }else{
-            return false;
+            $stmt = $this->mysqli->prepare("INSERT INTO tbl_cliente (`nome`,`sobrenome`, `email`, `senha`, `endereco`,`numero`, `bairro`, `cep`, `cidade`, `estado`, `preferencia`) VALUES (?,?,?,?,?,?,?,?,?,?,?);");
+            $stmt->bind_param("sssssssssss",$nome,$sobrenome,$email,$senha,$endereco,$num,$bairro,$cep,$cidade,$estado,$preferencia);
+            if( $stmt->execute() == TRUE){
+                return true ;
+            }else{
+                return false;
+            }
         }
+        
+        
 
     }
 
     public function setProduto($nomeProd,$categoriaProd,$tipo1,$tipo2,$faixaProd,$quantProd,$marcaProd,$valorProd,$materialProd,$descProd){
-        $img = $this->retornaImg();
-        $img1 = "img/produtos/" . $img['img1'];
-        $img2 = "img/produtos/" . $img['img2'];
-        $img3 = "img/produtos/" . $img['img3'];
+        $stmt = $this->mysqli->query("SELECT * FROM tbl_produto WHERE `nome` = '" . $nomeProd . "';");
+        $repeat = mysqli_num_rows($stmt); 
 
-        $stmt = $this->mysqli->prepare("INSERT INTO tbl_produto (`categoria`,`nome`, `tipo1`, `tipo2`, `faixa_etaria`, `quant`, `preco`, `marca`, `material`, `descricao`, `img1`, `img2`, `img3`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);");
-        $stmt->bind_param("sssssssssssss",$categoriaProd,$nomeProd,$tipo1,$tipo2,$faixaProd,$quantProd,$valorProd,$marcaProd,$materialProd,$descProd,$img1,$img2,$img3);
-        
-        if( $stmt->execute() == TRUE){
-            return true ;
+        if($repeat > 0){
+            return 2;
         }else{
-            return false;
+            $img = $this->retornaImg();
+            $img1 = "img/produtos/" . $img['img1'];
+            $img2 = "img/produtos/" . $img['img2'];
+            $img3 = "img/produtos/" . $img['img3'];
+
+            $stmt = $this->mysqli->prepare("INSERT INTO tbl_produto (`categoria`,`nome`, `tipo1`, `tipo2`, `faixa_etaria`, `quant`, `preco`, `marca`, `material`, `descricao`, `img1`, `img2`, `img3`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            $stmt->bind_param("sssssssssssss",$categoriaProd,$nomeProd,$tipo1,$tipo2,$faixaProd,$quantProd,$valorProd,$marcaProd,$materialProd,$descProd,$img1,$img2,$img3);
+            
+            if( $stmt->execute() == TRUE){
+                return true ;
+            }else{
+                return false;
+            }
         }
+
+        
 
     }
 
     public function updateProduto($id_prod,$nomeProd,$categoriaProd,$tipo1,$tipo2,$faixaProd,$quantProd,$marcaProd,$valorProd,$materialProd,$descProd){
-        $stmt = $this->mysqli->query("UPDATE  tbl_produto  SET `categoria` = '" . $categoriaProd . "', `nome` = '" . $nomeProd . "', `tipo1` = '" . $tipo1 . "', `tipo2` = '" . $tipo2 . "', `faixa_etaria` = '" . $faixaProd . "', `quant` = '" . $quantProd . "', `preco` = '" . $valorProd . "',`marca` = '" . $marcaProd . "',`material` = '" . $materialProd . "',`descricao` = '" . $descProd . "' WHERE `tbl_produto`.`id` = " . $id_prod . ";");
-        if( $stmt > 0){
-            return true;
+        $stmt = $this->mysqli->query("SELECT * FROM tbl_produto WHERE `nome` = '" . $nomeProd . "' AND id != '" . $id_prod . "';");
+        $repeat = mysqli_num_rows($stmt); 
+
+        if($repeat > 0){
+            return 2;
         }else{
-            return false;
+            $stmt = $this->mysqli->query("UPDATE  tbl_produto  SET `categoria` = '" . $categoriaProd . "', `nome` = '" . $nomeProd . "', `tipo1` = '" . $tipo1 . "', `tipo2` = '" . $tipo2 . "', `faixa_etaria` = '" . $faixaProd . "', `quant` = '" . $quantProd . "', `preco` = '" . $valorProd . "',`marca` = '" . $marcaProd . "',`material` = '" . $materialProd . "',`descricao` = '" . $descProd . "' WHERE `tbl_produto`.`id` = " . $id_prod . ";");
+            if( $stmt > 0){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 
