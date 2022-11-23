@@ -35,8 +35,8 @@ class index
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="img/MagicHat/icone.ico" rel="icon">
-  <link href="img/MagicHat/icone.ico" rel="apple-touch-icon">
+  <link href="img/magichat/icone.ico" rel="icon">
+  <link href="img/magichat/icone.ico" rel="apple-touch-icon">
   <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
 
   <!-- Google Fonts -->
@@ -76,7 +76,7 @@ class index
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><img src="img/MagicHat/logo.png">
+        <h1><img src="img/magichat/logo.png">
           <a href="index_gerente.php">Magic Hat</a></img>
         </h1>
       </div>

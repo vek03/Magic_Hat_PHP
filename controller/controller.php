@@ -1,9 +1,9 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once("$root/model/model_compra.php");
-require_once("$root/model/model_produto.php");
-require_once("$root/model/model_cliente.php");
-require_once("$root/model/banco.php");
+require_once("$root/Magic-Hat-Requien/model/model_compra.php");
+require_once("$root/Magic-Hat-Requien/model/model_produto.php");
+require_once("$root/Magic-Hat-Requien/model/model_cliente.php");
+require_once("$root/Magic-Hat-Requien/model/banco.php");
 class controller{
 
     private $compra;
@@ -43,7 +43,7 @@ class controller{
     }
 
     private function incluir(){
-        if(isset($_POST['txtEndereco']) == FALSE){
+        if($_POST['txtEndereco'] != null){
             $this->cliente->setNome($_POST['txtNome']);
             $this->cliente->setSobrenome($_POST['txtSobrenome']);
             $this->cliente->setEmail($_POST['txtEmail']);
