@@ -46,6 +46,7 @@ class produtos
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
       <!-- Vendor CSS Files -->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
       <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -165,6 +166,45 @@ class produtos
               <p>Produtos</p>
               <h2>RESULTADOS DA PESQUISA:</h2>
             </div>
+
+            <center>
+
+              <div id="carouselExampleControls" data-aos-delay="5000" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/bonecas.jpg">
+                  </div>
+
+                  <div class="carousel-item active">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/bonecos.jpg">
+                  </div>
+
+                  <div class="carousel-item">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/carrinhos.jpg">
+                  </div>
+
+                  <div class="carousel-item">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/herois.jpg">
+                  </div>
+
+                  <div class="carousel-item">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/jogos.jpg">
+                  </div>
+
+                  <div class="carousel-item">
+                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/princesas.jpg">
+                  </div>
+                </div>
+
+
+              </div>
+
+            </center>
+          </div>
+        </section>
+        <!-- End Cta Section -->
+
 
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio">
@@ -521,7 +561,6 @@ class produtos
       <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
