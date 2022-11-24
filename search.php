@@ -163,47 +163,8 @@ class produtos
           <div class="container">
             <div class="section-title" data-aos="zoom-out">
               <p>Produtos</p>
-              <h2>VEJA NOSSO CATÁLOGO DE PRODUTOS</h2>
+              <h2>RESULTADOS DA PESQUISA:</h2>
             </div>
-
-            <center>
-
-              <div id="carouselExampleControls" data-aos-delay="5000" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-
-                  <div class="carousel-item active">
-                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/bonecas.jpg">
-                  </div>
-
-                  <div class="carousel-item active">
-                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/bonecos.jpg">
-                  </div>
-
-                  <div class="carousel-item">
-                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/carrinhos.jpg">
-                  </div>
-
-                  <div class="carousel-item">
-                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/herois.jpg">
-                  </div>
-
-                  <div class="carousel-item">
-                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/jogos.jpg">
-                  </div>
-
-                  <div class="carousel-item">
-                    <img class="animate__animated animate__fadeInLeft ratio ratio-21x9" src="img/bannercategorias/princesas.jpg">
-                  </div>
-                </div>
-
-
-              </div>
-
-            </center>
-          </div>
-        </section>
-        <!-- End Cta Section -->
-
 
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio">
