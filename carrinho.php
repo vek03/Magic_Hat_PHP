@@ -215,7 +215,7 @@ class finalizar
                         <div class="row pricing">
                             <div class="col">
                                 <form class="php-email-form">
-                                    <div class="btn-wrap text-center">
+                                    <div class="text-center">
                                             <button type="button" onclick="javascript: document.location='finalizar.php'" id="btnFinalizar" class="btn btn-buy php-email-form">Finalizar Compra</button>
                                     </div>
                                 </form>
