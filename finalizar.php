@@ -17,7 +17,9 @@ class index
             $controller = new controller();
             $cliente = $controller->captar($cod_cli);
             $carrinho = $controller->carrinho($cod_cli, 0, 1);
+            $script = "javascript:document.location='carrinho.php'";
         } else {
+            $script = "javascript:alert('Entre na sua conta para adicionar itens ao seu carrinho...');";
             $logado = false;
         }
 
@@ -112,6 +114,12 @@ class index
                             </li>
                         </ul>
                         <i class="bi bi-list mobile-nav-toggle"></i>
+
+                        <button id="cart" class="navbar-toggler" type="button" data-bs-toggle="modal" onclick="<?php echo $script; ?>">
+                        <span>
+                            <ion-icon id="cart" name="cart"></ion-icon>
+                        </span>
+                        </button>
                     </nav><!-- .navbar -->
 
                 </div>
