@@ -37,6 +37,11 @@ h6 {
   align-items: left;
 }
 
+.txtRight {
+  text-align: right;
+  align-items: right;
+}
+
 .txtCenter {
   align-items: center;
   text-align: center;
@@ -1617,7 +1622,7 @@ footer a {
   cursor: pointer;
   margin-top: 50px;
 }
-
+@media (min-width: 1200px){
 .flip-box-front,
 .flip-box-back {
   background-size: cover;
@@ -1627,6 +1632,29 @@ footer a {
   transition: transform 0.7s cubic-bezier(.4, .2, .2, .1);
   backface-visibility: hidden;
 }
+}
+@media (max-width: 1199px){
+.flip-box-front,
+.flip-box-back {
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  min-height: 800px;
+  transition: transform 0.7s cubic-bezier(.4, .2, .2, .1);
+  backface-visibility: hidden;
+}
+}
+@media (max-width: 766px){
+  .flip-box-front,
+  .flip-box-back {
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    min-height: 400px;
+    transition: transform 0.7s cubic-bezier(.4, .2, .2, .1);
+    backface-visibility: hidden;
+  }
+  }
 
 .flip-box-front {
   transform: rotateY(0deg);
@@ -1911,4 +1939,22 @@ footer a {
   border-color: #A11E1D;
   outline: 0;
   box-shadow: 0 0 0 0.25rem #A11E1D;
+}
+@media (min-width: 1000px){
+  #cu .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+    
+}
+}
+.bruh {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+justify-content: center;
+}
+@media screen and (min-width: 1000px) {
+  .bruh {
+    flex-direction: row;
+  }
 }

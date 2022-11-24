@@ -202,7 +202,7 @@ class index
               </div>
 
               <div class="row">
-                <div class="col-lg-4 col-md-6 ">
+                <div class="col-lg-4 col-md-6 mt-5">
                   <a href="produtos.php?bonecas">
                     <div class="icon-box" data-aos="zoom-in-left">
                       <div class="icon"><img id="categoriaimg" src="img/categorias/bonecas.png">
@@ -212,7 +212,7 @@ class index
                   </a>
                 </div>
 
-                <div class="col-lg-4 col-md-6 mt-5 mt-lg-0 ">
+                <div class="col-lg-4 col-md-6 mt-5">
                   <a href="produtos.php?bonecos">
                     <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="200">
                       <div class="icon"><img src="img/categorias/bonecos.png" id="categoriaimg">
@@ -222,7 +222,7 @@ class index
                   </a>
                 </div>
 
-                <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
+                <div class="col-lg-4 col-md-6 mt-5">
                   <a href="produtos.php?carrinhos">
                     <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="100">
                       <div class="icon"><img src="img/categorias/carrinhos.png" id="categoriaimg">

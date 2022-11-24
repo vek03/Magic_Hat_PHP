@@ -238,9 +238,11 @@ class produtos
                       $qttd = "var btn = document.getElementById('btnValue" . $produtos[$i]['id'] . "').innerHTML.toString();";
                       $script = "javascript:" . $qttd . "var result = confirm('Deseja adicionar ao carrinho?'); if(result == true){document.location='cart.php?produto=" . $produtos[$i]['id'] . "&qttd=' + btn}";
                     }
+
+                    if($produtos[$i]['quant'] > 0){
                 ?>
 
-<div class="col-lg-3 col-md-6 mt-4 mt-md-0 portfolio-item <?php echo $produtos[$i]['categoria']; ?>">
+                  <div class="col-lg-3 col-md-6 mt-4 mt-md-0 portfolio-item <?php echo $produtos[$i]['categoria']; ?>">
                     <div class="box " data-aos="zoom-in" data-aos-delay="100">
                       <h3 style="height: 105px;"><?php echo $produtos[$i]['nome']; ?></h3>
                       <div><img style="height: 250px; width: 250px;" src="<?php echo $produtos[$i]['img1']; ?>"></div>
@@ -249,7 +251,7 @@ class produtos
                         <div class="btn-group me-2" role="group" aria-label="First group">
                           <button id="btnMenos" type="button" onclick="javascript:var btn = parseInt(document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn > 1){document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML = btn - 1}" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">-</button>
                           <button id="btnValue<?php echo $produtos[$i]['id']; ?>" type="button" style="background-color: white; color:black; border-color: #ED4442;" class="btn btn-primary">1</button>
-                          <button id="btnMais" onclick="javascript:var btn = parseInt(document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn < 20){document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML = btn + 1}" type="button" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">+</button>
+                          <button id="btnMais" onclick="javascript:var btn = parseInt(document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn < <?php echo $produtos[$i]['quant']; ?>){document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML = btn + 1}" type="button" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">+</button>
                         </div>
                       </div>
                       <div class="btn-wrap">
@@ -265,7 +267,8 @@ class produtos
                     </div>
                   </div>
                   <?php
-                    }
+                    }  
+                  }
                   ?>
               </div>
             </div>
@@ -283,6 +286,8 @@ class produtos
           $qttd = "var btn = document.getElementById('btnVar" . $produtos[$i]['id'] . "').innerHTML.toString();";
           $script = "javascript:" . $qttd . "var result = confirm('Deseja adicionar ao carrinho?'); if(result == true){document.location='cart.php?produto=" . $produtos[$i]['id'] . "&qttd=' + btn}";
         }
+
+        if($produtos[$i]['quant'] > 0){
       ?>
       <div class="modal fade" id="staticBackdrop<?php echo $i; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -402,7 +407,7 @@ class produtos
                   <div class="product btn-group" role="group" aria-label="Basic example">
                   <button type="button" onclick="javascript:var btn = parseInt(document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn > 1){document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML = btn - 1}" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">-</button>
                   <button id="btnVar<?php echo $produtos[$i]['id']; ?>" type="button" style="background-color: white; color:black; border-color: #ED4442;" class="btn btn-primary">1</button>
-                  <button onclick="javascript:var btn = parseInt(document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn < 20){document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML = btn + 1}" type="button" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">+</button>
+                  <button onclick="javascript:var btn = parseInt(document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn < <?php echo $produtos[$i]['quant']; ?>){document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML = btn + 1}" type="button" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">+</button>
                   </div>
                   <br>
 
@@ -422,7 +427,8 @@ class produtos
         </div>
       </div>
       <?php
-        }
+        }  
+      }
       ?>
     </section>
     <!-- End Janela modal -->

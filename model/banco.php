@@ -16,15 +16,14 @@ class Banco{
 
     public function __construct(){
         $this->conexao();
-        $this->mysqli->query("SET NAMES 'utf8'");
-        $this->mysqli->query('SET character_set_connection=utf8');
-        $this->mysqli->query('SET character_set_client=utf8');
-        $this->mysqli->query('SET character_set_results=utf8');
     }
 
     private function conexao(){
         $this->mysqli = new mysqli(BD_SERVIDOR, BD_USUARIO , BD_SENHA, BD_BANCO);
-        
+        $this->mysqli->query("SET NAMES 'utf8'");
+        $this->mysqli->query('SET character_set_connection=utf8');
+        $this->mysqli->query('SET character_set_client=utf8');
+        $this->mysqli->query('SET character_set_results=utf8');
     }
 
     public function setCompra(){
@@ -370,7 +369,7 @@ class Banco{
                         $stmt = $this->mysqli->query("SELECT * FROM tbl_produto WHERE id =" . $carrinho[$ii]['id_produto'] . ";");
                         $lista = $stmt->fetch_all(MYSQLI_ASSOC);
                         foreach ($lista as $l) {
-                            $carrinho[$ii]['produto'] = utf8_encode($l['nome']);
+                            $carrinho[$ii]['produto'] = $l['nome'];
                             $carrinho[$ii]['preco'] = $l['preco'];
                             $carrinho[$ii]['img'] = $l['img1'];
                             $carrinho[$ii]['quant_index'] = $l['quant'];

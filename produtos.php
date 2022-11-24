@@ -13,7 +13,7 @@ class produtos
     session_start();
 
     if (isset($_SESSION['id_cliente']) && $_SESSION['id_cliente'] > 0) {
-      
+
       $cod_cli = $_SESSION['id_cliente'];
       $logado = true;
       $controller = new controller();
@@ -51,9 +51,9 @@ class produtos
       <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet">
       <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
       <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
       <!-- Template Main CSS File -->
       <link href="css/style.css" rel="stylesheet">
@@ -95,22 +95,22 @@ class produtos
                   </span> </a>
                 <ul>
                   <?php
-                    if($logado == 1){
-                  ?>
-                  
-                  <li><a href="editarinfo.php">Editar informações</a></li>
-                  <li><a href="model/destroy.php?id=1">Sair da conta</a></li>
-
-                  <?php
-                    }else{
+                  if ($logado == 1) {
                   ?>
 
-                  <li><a href="login.php">Login</a></li>
-                  <li><a href="login_gerente.php">Login - Gerente</a></li>
-                  <li><a href="cadastro.php">Cadastre-se</a></li>
+                    <li><a href="editarinfo.php">Editar informações</a></li>
+                    <li><a href="model/destroy.php?id=1">Sair da conta</a></li>
 
                   <?php
-                    }
+                  } else {
+                  ?>
+
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="login_gerente.php">Login - Gerente</a></li>
+                    <li><a href="cadastro.php">Cadastre-se</a></li>
+
+                  <?php
+                  }
                   ?>
                 </ul>
               </li>
@@ -229,14 +229,16 @@ class produtos
               <div class="row">
 
                 <?php
-                  $controller = new controller();
-                  $produtos = $controller->pesquisar("", 0);
+                $controller = new controller();
+                $produtos = $controller->pesquisar("", 0);
 
-                  for ($i = 0; $i < count($produtos); $i++) {
-                    if ($logado != 0) {
-                      $qttd = "var btn = document.getElementById('btnValue" . $produtos[$i]['id'] . "').innerHTML.toString();";
-                      $script = "javascript:" . $qttd . "var result = confirm('Deseja adicionar ao carrinho?'); if(result == true){document.location='cart.php?produto=" . $produtos[$i]['id'] . "&qttd=' + btn}";
-                    }
+                for ($i = 0; $i < count($produtos); $i++) {
+                  if ($logado != 0) {
+                    $qttd = "var btn = document.getElementById('btnValue" . $produtos[$i]['id'] . "').innerHTML.toString();";
+                    $script = "javascript:" . $qttd . "var result = confirm('Deseja adicionar ao carrinho?'); if(result == true){document.location='cart.php?produto=" . $produtos[$i]['id'] . "&qttd=' + btn}";
+                  }
+
+                  if($produtos[$i]['quant'] > 0){
                 ?>
 
                   <div class="col-lg-3 col-md-6 mt-4 mt-md-0 portfolio-item <?php echo $produtos[$i]['categoria']; ?>">
@@ -248,7 +250,7 @@ class produtos
                         <div class="btn-group me-2" role="group" aria-label="First group">
                           <button id="btnMenos" type="button" onclick="javascript:var btn = parseInt(document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn > 1){document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML = btn - 1}" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">-</button>
                           <button id="btnValue<?php echo $produtos[$i]['id']; ?>" type="button" style="background-color: white; color:black; border-color: #ED4442;" class="btn btn-primary">1</button>
-                          <button id="btnMais" onclick="javascript:var btn = parseInt(document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn < 20){document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML = btn + 1}" type="button" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">+</button>
+                          <button id="btnMais" onclick="javascript:var btn = parseInt(document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn < <?php echo $produtos[$i]['quant']; ?>){document.getElementById('btnValue<?php echo $produtos[$i]['id']; ?>').innerHTML = btn + 1}" type="button" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">+</button>
                         </div>
                       </div>
                       <div class="btn-wrap">
@@ -263,9 +265,10 @@ class produtos
                       </div>
                     </div>
                   </div>
-                  <?php
-                    }
-                  ?>
+                <?php
+                  }  
+                }
+                ?>
               </div>
             </div>
 
@@ -275,156 +278,158 @@ class produtos
 
 
         <!-- ======= Janela Modal ======= -->
-     <section>
-      <?php
-      for ($i = 0; $i < count($produtos); $i++) {
-        if ($logado != 0) {
-          $qttd = "var btn = document.getElementById('btnVar" . $produtos[$i]['id'] . "').innerHTML.toString();";
-          $script = "javascript:" . $qttd . "var result = confirm('Deseja adicionar ao carrinho?'); if(result == true){document.location='cart.php?produto=" . $produtos[$i]['id'] . "&qttd=' + btn}";
-        }
-      ?>
-      <div class="modal fade" id="staticBackdrop<?php echo $i; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-dialog modal-xl">
-          <div class="modal-content">
+        <section>
+          <?php
+          for ($i = 0; $i < count($produtos); $i++) {
+            if ($logado != 0) {
+              $qttd = "var btn = document.getElementById('btnVar" . $produtos[$i]['id'] . "').innerHTML.toString();";
+              $script = "javascript:" . $qttd . "var result = confirm('Deseja adicionar ao carrinho?'); if(result == true){document.location='cart.php?produto=" . $produtos[$i]['id'] . "&qttd=' + btn}";
+            }
 
-            <!-- Carros de imagens do produto -->
-            <div class="products modal-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <div id="carouselExampleIndicators<?php echo $i; ?>" class="carousel slide" data-bs-ride="true">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="<?php echo $produtos[$i]['img1']; ?>" class="d-block w-100">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="<?php echo $produtos[$i]['img2']; ?>" class="d-block w-100">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="<?php echo $produtos[$i]['img3']; ?>" class="d-block w-100">
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<?php echo $i; ?>"
-                      data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<?php echo $i; ?>"
-                      data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
-                  </div>
-                </div>
+            if($produtos[$i]['quant'] > 0){
+          ?>
+            <div class="modal fade" id="staticBackdrop<?php echo $i; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-dialog modal-xl">
+                <div class="modal-content">
 
+                  <!-- Carros de imagens do produto -->
+                  <div class="products modal-body">
 
-                <div class="text-center col-md-6">
-
-                  <div>
-                    <h2><?php echo $produtos[$i]['nome']; ?></h2>
-
-                    <p></p>
-                  </div>
-
-
-                  <!-- Acordião -->
-                  <div>
-                    <!-- Acordião Descrição -->
-                    <div class="accordion" id="accordionExample">
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                          <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Descrição
-                          </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                          data-bs-parent="#accordionExample">
-                          <div class="accordion-body">
-                            <?php echo $produtos[$i]['descricao']; ?>
+                    <div class="row bruh">
+                      <div class="col">
+                        <div id="carouselExampleIndicators<?php echo $i; ?>" class="carousel slide" data-bs-ride="true">
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="<?php echo $produtos[$i]['img1']; ?>" class="d-block w-100">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="<?php echo $produtos[$i]['img2']; ?>" class="d-block w-100">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="<?php echo $produtos[$i]['img3']; ?>" class="d-block w-100">
+                            </div>
                           </div>
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<?php echo $i; ?>" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<?php echo $i; ?>" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          </button>
                         </div>
                       </div>
 
 
-                      <!-- Acordião Detalhe -->
-                      <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                          <button class="Bara-button accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Detalhes
-                          </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                          data-bs-parent="#accordionExample">
-                          <div class="accordion-body">
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                  <th scope="row">Tipo:</th>
-                                  <td><?php echo $produtos[$i]['tipo1'] . " e " . $produtos[$i]['tipo2']; ?></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Categoria(s):</th>
-                                  <td><?php echo $produtos[$i]['categoria']; ?></td>
+                      <div class="text-center col">
 
-                                <tr>
-                                  <th scope="row">Faixa etária:</th>
-                                  <td><?php echo $produtos[$i]['faixa']; ?></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Marca</th>
-                                  <td><?php echo $produtos[$i]['marca']; ?></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">Material/Composição</th>
-                                  <td><?php echo $produtos[$i]['material']; ?></td>
-                                </tr>
-                              </tbody>
-                            </table>
+                        <div>
+                          <h2><?php echo $produtos[$i]['nome']; ?></h2>
+
+                          <p></p>
+                        </div>
+
+
+                        <!-- Acordião -->
+                        <div>
+                          <!-- Acordião Descrição -->
+                          <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Descrição
+                                </button>
+                              </h2>
+                              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                  <?php echo $produtos[$i]['descricao']; ?>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <!-- Acordião Detalhe -->
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingThree">
+                                <button class="Bara-button accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  Detalhes
+                                </button>
+                              </h2>
+                              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                  <table class="table">
+                                    <tbody>
+                                      <div>
+                                        <b><span scope="row" class="txtLeft">Tipo:</span></b>
+                                        <span class="txtRight"><?php echo $produtos[$i]['tipo1'] . " e " . $produtos[$i]['tipo2']; ?></span>
+                                      </div>
+
+                                      <div>
+                                      <b><span scope="row">Categoria(s):</span></b>
+                                        <span><?php echo $produtos[$i]['categoria']; ?></span>
+                                      </div>
+
+                                      <div>
+                                      <b><span scope="row">Faixa etária:</span></b>
+                                        <span><?php echo $produtos[$i]['faixa']; ?></span>
+                                      </div>
+
+                                      <div>
+                                      <b><span scope="row">Marca:</span></b>
+                                        <span><?php echo $produtos[$i]['marca']; ?></span>
+                                      </div>
+
+                                      <div>
+                                      <b><span scope="row">Material/Composição:</span></b>
+                                        <span><?php echo $produtos[$i]['material']; ?></span>
+                                      </div>
+
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
+
+                        <br>
+
+                        <!-- parte do Preço do produto -->
+
+                        <div class="row pricing">
+                          <div class="col-md-12">
+                            <h4 style="color: black"><sup>R$ <?php echo $produtos[$i]['preco']; ?></sup></h4>
+                          </div>
+                        </div>
+
+                        <br>
+
+                        <div class="product btn-group" role="group" aria-label="Basic example">
+                          <button type="button" onclick="javascript:var btn = parseInt(document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn > 1){document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML = btn - 1}" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">-</button>
+                          <button id="btnVar<?php echo $produtos[$i]['id']; ?>" type="button" style="background-color: white; color:black; border-color: #ED4442;" class="btn btn-primary">1</button>
+                          <button onclick="javascript:var btn = parseInt(document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn < <?php echo $produtos[$i]['quant']; ?>){document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML = btn + 1}" type="button" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">+</button>
+                        </div>
+                        <br>
+
+                        <!-- Botão de compra -->
+                        <br>
+                        <div class="product text-center">
+                          <button type="button" class="btn btn-buy" onclick="<?php echo $script; ?>">+ Carrinho</button>
+
+                          <button type="button" class=" btn-buy btn " data-bs-dismiss="modal">Voltar</button>
+                        </div>
                       </div>
+
+
                     </div>
-                  </div>
-
-                  <br>
-
-                  <!-- parte do Preço do produto -->
-                  
-                  <div class="row pricing">
-                    <div class="col-md-12">
-                    <h4 style="color: black"><sup>R$ <?php echo $produtos[$i]['preco']; ?></sup></h4>
-                    </div>
-                  </div>
-                  
-                  <br>
-
-                  <div class="product btn-group" role="group" aria-label="Basic example">
-                  <button type="button" onclick="javascript:var btn = parseInt(document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn > 1){document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML = btn - 1}" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">-</button>
-                  <button id="btnVar<?php echo $produtos[$i]['id']; ?>" type="button" style="background-color: white; color:black; border-color: #ED4442;" class="btn btn-primary">1</button>
-                  <button onclick="javascript:var btn = parseInt(document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML.toString()); if(btn < 20){document.getElementById('btnVar<?php echo $produtos[$i]['id']; ?>').innerHTML = btn + 1}" type="button" style="background-color: #ED4442; border-color: #ED4442;" class="btn btn-primary">+</button>
-                  </div>
-                  <br>
-
-                  <!-- Botão de compra -->
-                  <br>
-                  <div class="product text-center">
-                    <button type="button" class="btn btn-buy" onclick="<?php echo $script; ?>">+ Carrinho</button>
-                    
-                    <button type="button" class=" btn-buy btn " data-bs-dismiss="modal">Voltar</button>
                   </div>
                 </div>
-
-
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <?php
-        }
-      ?>
-    </section>
-    <!-- End Janela modal -->
+          <?php
+            }  
+          }
+          ?>
+        </section>
+        <!-- End Janela modal -->
 
 
       </main>
@@ -452,24 +457,24 @@ class produtos
       <footer>
 
         <!-- Seção de Mídias Sociais -->
-          <ul class="social_icon">
-            <li><a href="https://twitter.com/MagicHatOficial">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
-            </li>
-            <li><a href="https://www.instagram.com/magic.hat.of/">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </a>
-            </li>
-            <li><a href="https://www.linkedin.com/in/magic-hat-45bb81257">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </li>
-            <li><a href="https://www.facebook.com/profile.php?id=100088264081232">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-            </li>
-          </ul>
+        <ul class="social_icon">
+          <li><a href="https://twitter.com/MagicHatOficial">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+          <li><a href="https://www.instagram.com/magic.hat.of/">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+          <li><a href="https://www.linkedin.com/in/magic-hat-45bb81257">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+          <li><a href="https://www.facebook.com/profile.php?id=100088264081232">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+        </ul>
 
 
         <div class="container text-center text-md-start mt-5">
@@ -552,18 +557,18 @@ class produtos
 
       <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-        <!-- Vendor JS Files -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <!-- Vendor JS Files -->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <!-- Template Main JS File -->
+      <!-- Template Main JS File -->
       <script src="js/main.js"></script>
 
     </body>
